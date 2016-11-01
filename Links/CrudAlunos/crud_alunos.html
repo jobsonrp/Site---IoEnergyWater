@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html  xml:lang="pt" lang="pt">
+ 
+<head>
+	<title>Menu Horizontal</title>
+	<style type="text/css">
+	<!--
+		body {
+                        font-family:Verdana, Arial, Helvetica; 
+                        font-size:14px;
+                        line-height:20px;
+                        margin:0px;
+                        margin-bottom:0px;
+                        padding:0px;
+		}
+                #area_geral{
+                        width:1050px;
+                        height:auto;
+                        margin:auto;
+                }
+		#menu ul {
+			padding:0px;
+			margin:0px;
+			float: left;
+			width: 100%;
+			background-color:#eeeeff;
+			list-style:none;
+			font:100% Tahoma;
+		}
+ 
+		#menu ul li { display: inline; }
+ 
+		#menu ul li a {
+			background-color:#eeeeff;
+			color: #333000;
+			text-decoration: none;
+			border-bottom:3px solid #eeeeff;
+			padding: 2px 10px;
+			float:left;
+		}
+ 
+		#menu ul li a:hover {
+			background-color:#fff;
+			color: #ffff;
+			border-bottom:3px solid #EA0000;
+		}
+	-->
+	</style>
+</head>
+ 
+<body bgcolor="#eeeeff">
+  
+  <div id=area_geral>
+  	<div id="menu">
+		<ul>
+			<li><a href="">Home</a></li>
+			<li><a href="">Sobre</a></li>
+			<li><a href="">Artigos</a></li>
+			<li><a href="">Estudos</a></li>
+			<li><a href="">Diretório</a></li>
+			<li><a href="">CURSO</a></li>
+			<li><a href="">Links</a></li>
+			<li><a href="">Contato</a></li>
+		</ul>
+	</div>
+<table width="1050" border="0" bgcolor="#000033"
+                cellspacing="0" cellpadding="0">
+ <tr><td>&nbsp;</td></tr>
+ <tr>
+  <td><font size="4" color="#FFFFFF"><strong>&nbsp;&nbsp; 
+                     CRUD - Alunos</strong></font></td>
+ </tr>
+ <tr><td>&nbsp;</td></tr>
+</table>
+  
+<table width="1050" border="0" bgcolor="#4499FF" 
+                cellpadding="0" cellspacing="0">
+ <tr><td>&nbsp;</td></tr> <tr><td>&nbsp;</td></tr>
+ <tr>
+  <td width="125">&nbsp;</td>	
+  <td width="538" height="255" valign="top">
+ <table width="90%" border="0" bgcolor="#DADDFE"
+     cellpadding="0" cellspacing="0" rules="cols">
+ <tr><td colspan="4" align="center">
+         <h3><u>Administração dos Alunos</u></h3></td></tr>
+<!-- --------------------- Submenu alunos ----------------------------- -->	
+  <td width="22%" height="253" valign="top">
+ <table width="100%" border="0" bgcolor="#DADDFE"
+                  cellpadding="0" cellspacing="0">
+ <form name="form1" method="post" action="admin_aluno.php"
+        onsubmit="return validar(this);">	   
+  <tr><td>&nbsp;&nbsp;&nbsp;Código do Aluno:
+      <input type="text" size=10 name="aluno" value=""> </td></tr>
+  <tr><td>&nbsp;</td></tr>	
+  <tr><td align="center">
+      <input name="oper" type="radio" id="oper1a" value="con" />
+   <label for="oper1a">Consultar</label>
+      <input name="oper" type="radio" id="oper1b" value="exc" />
+   <label for="oper1b">Excluir</label>
+      <input name="oper" type="radio" id="oper1c" value="alt" />
+   <label for="oper1c">Alterar</label> 
+	  &nbsp;&nbsp;<input type="submit" name="enter" value=" Enter "> </td></tr>
+  <tr><td>&nbsp;</td></tr>
+  <tr><td align="center">
+      <input type="button" value=" &nbsp;Listar&nbsp;&nbsp; " 
+             onclick="window.location='lista_alunos.php'"></td></tr>
+  <tr><td>&nbsp;</td></tr>
+  <tr><td><hr /></td></tr>
+ </form>
+  <tr><td align="center">	
+      <h3><u>Cadastro dos Alunos</u></h3></td></tr>
+
+  <tr><td align="center">	
+      <input type="button" value=" &nbsp;Incluir&nbsp;&nbsp; " 
+             onclick="window.location='inc_aluno.php'"></td></tr>
+  <tr><td>&nbsp;</td></tr>
+
+ </table> </td>
+ 
+</table></td>
+   <td width="63">&nbsp;</td></tr> 
+  <tr><td>&nbsp;</td></tr>
+</table>
+</div>
+  
+</body>
+</html>	

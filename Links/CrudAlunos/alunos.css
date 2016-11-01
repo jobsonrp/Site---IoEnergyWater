@@ -1,0 +1,31 @@
+@charset "utf-8";
+ /*CSS Document */
+body{
+font-family:Verdana, Arial, Helvetica; 
+font-size:12px;
+line-height:20px;
+margin:0px;
+margin-bottom:0px;
+padding:0px;
+}
+#area_geral{
+width:750px;
+height:auto;
+margin:auto;
+}
+.f1{
+font-size:18px;
+color:#000033;
+ font:bold;
+ text-decoration:underline;
+ }
+ .brco1{
+ text-indent:30px;
+ }
+ .brco2{ 
+ text-indent:6px;
+ }
+ .brco3{
+ text-indent:90px;
+ }
+
