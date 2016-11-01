@@ -4,6 +4,51 @@
 <html  xml:lang="pt" lang="pt">
  
 <head>
+
+<script language="JavaScript">
+function validar(form1) {
+    var jsEmail=document.form1.inputEmail.value
+    if (!jsEmail) {
+        alert("Informe seu e-mail")
+        document.form1.inputEmail.focus()
+        return false
+    }	 	 
+    var tstEmail
+    tstEmail=validarEmail(jsEmail)
+    if (tstEmail==false) {
+        alert("E-mail inválido")
+        document.form1.inputEmail.focus()
+        return false
+    }
+}
+function validarEmail(email) {
+    var tstLogico=false
+    var tam=(email.length)
+    var i
+    for(i=0;i<=tam;i++) { 
+        if ((email.substr(i,1)) == "@") {
+            tstLogico=true
+            break
+        }    
+    }
+    if (tstLogico)
+        return true
+    else
+        return false 
+}
+function validarData(data) {
+    var dia=data.substr(0,2)
+    var mes=data.substr(3,2)
+    var ano=data.substr(6,4)
+    if ((dia>"00") && (dia<=31) &&
+        (mes>"00") && (mes<=12) &&
+        (!(isNaN(ano))) && (ano>2000))
+        return true
+    else
+        return false
+}
+</script>
+
 	<title>Menu Horizontal</title>
 	<style type="text/css">
 	<!--
@@ -104,14 +149,14 @@ body {
   <div id=area_geral>
   	<div id="menu">
 		<ul>
-			<li><a href="http://jobsonrp.pe.hu">Home</a></li>
-			<li><a href="">Sobre</a></li>
-			<li><a href="">Artigos</a></li>
-			<li><a href="">Estudos</a></li>
-			<li><a href="">Diretório</a></li>
-			<li><a href="">CURSO</a></li>
-			<li><a href="http://jobsonrp.pe.hu/Links/links.html">Links</a></li>
-			<li><a href="">Contato</a></li>
+			<li><a href="index.html">Login</a></li>
+			<li><a href="">Home</a></li>
+			<li><a href="">Energy</a></li>
+			<li><a href="">Water</a></li>
+			<li><a href="">Alerts</a></li>
+			<li><a href="">Energy History</a></li>
+			<li><a href="">Water History</a></li>
+			<li><a href="logout.php">Logout</a></li>
 		</ul>
 	</div>
 <table width="1050" border="0" bgcolor="#000033"
@@ -144,13 +189,12 @@ body {
   <tr><td align="center">
     
   
-
-<form method="POST" action="login.php">
+<form id="form1" name="form1" method="POST" action="login.php" onsubmit="return validar(this);">
 
   <div class="control-group">
 
     <div class="controls">
-      <input id="inputEmail" name="inputEmail" type="text" placeholder="Username or email address" />
+      <input id="inputEmail" name="inputEmail" type="text" placeholder="Email address" />
     </div>
     
     <div class="controls">
@@ -163,10 +207,11 @@ body {
     </div>
   </div>
 </form>
-    
    
 
 <form class="form-horizontal">
+
+  <h5>Login: jose@com.br     Password:1234.</h5>
   
   <h5>New to IoEnergyWater? Create an account.</h5>
 

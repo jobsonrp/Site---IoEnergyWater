@@ -1,9 +1,18 @@
+<?php
+	//15 2 2015
+	session_start();
+	if(!isset($_SESSION["status"]))
+        header("location:index.html");
+?>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
  
 <html  xml:lang="pt" lang="pt">
  
 <head>
+
 	<title>Menu Horizontal</title>
 	<style type="text/css">
 	<!--
@@ -104,14 +113,14 @@ body {
   <div id=area_geral>
   	<div id="menu">
 		<ul>
-			<li><a href="http://jobsonrp.pe.hu">Home</a></li>
-			<li><a href="">Sobre</a></li>
-			<li><a href="">Artigos</a></li>
-			<li><a href="">Estudos</a></li>
-			<li><a href="">Diretório</a></li>
-			<li><a href="">CURSO</a></li>
-			<li><a href="http://jobsonrp.pe.hu/Links/links.html">Links</a></li>
-			<li><a href="">Contato</a></li>
+			<li><a href="index.html">Login</a></li>
+			<li><a href="inicial.html">Home</a></li>
+			<li><a href="">Energy</a></li>
+			<li><a href="">Water</a></li>
+			<li><a href="">Alerts</a></li>
+			<li><a href="">Energy History</a></li>
+			<li><a href="">Water History</a></li>
+			<li><a href="logout.php">Logout</a></li>
 		</ul>
 	</div>
 <table width="1050" border="0" bgcolor="#000033"
@@ -146,7 +155,7 @@ body {
 
 <form class="form-horizontal">
   
-  <h5>New to GitHub? Create an account.</h5>
+  <h5>New to IoEnergyWater? Create an account.</h5>
 
 
   <tr><td align="center">	

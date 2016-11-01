@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 if(isset($_POST['inputEmail']))
     $login=$_POST['inputEmail'];
 if(isset($_POST['inputPassword']))
@@ -13,8 +15,13 @@ if(isset($_POST['inputPassword']))
           echo"<script language='javascript' type='text/javascript'>alert('Login e/ou senha incorretos');window.location.href='index.html';</script>";
           die();
         }else{
-          setcookie("login",$login);
-          header("Location:inicial.html");
+
+           $_SESSION["status"] = "1";
+           //$_SESSION['inputPassword'] = $senha;
+
+           header('location:inicial.html');
+
         }
     }
-?>	
+?>
+	
