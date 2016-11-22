@@ -121,17 +121,17 @@ th {
 <div class="iew-container iew-padding-large" style="margin-bottom:10px">
 <h3 class="iew-hide-small iew-hide-medium"></h3>
 
-  <!-- Header Home - Begin -->
+  <!-- Header Home -Begin -->
   <header class="w3-container" id="home">
 </br>
 <table>
   <tr>
-    <th>General</th>
-    <th>Consumption</th>
+    <th>General Consumption</th>
+    <th>Current Value</th>
   </tr>
   <tr>
     <td>Water Total</td>
-    <td style="text-align:right"><output id="waterTotal" size = "10"></td>
+    <td style="text-align:right"><output id="waterTotalHome" size = "10"></td>
   </tr>
   <tr>
     <td>Energy Total</td>
@@ -147,40 +147,49 @@ th {
 </br></br>
 <table>
   <tr>
-    <th>Current Energy</th>
-    <th>Consumption</th>
+    <th>Energy Sources</th>
+    <th>Current Value</th>
+    <th>Actions</th>
   </tr>
   <tr>
     <td>AirConditioning</td>
     <td style="text-align:right"><output id="airCond" size = "10"><br/></strong></td>
+    <td style="text-align:center"><select id="statusAir">  <option value="1">On  <option value="0">Off &nbsp;</select></td>	
   </tr>
   <tr>
     <td>Electric Shower</td>
     <td style="text-align:right"><output id="eShower" type="text"> <br /></strong></td>
+    <td style="text-align:center"><select id="statusShower">  <option value="1">On  <option value="0">Off &nbsp;</select></td>
   </tr>
   <tr>
     <td>LightingTotal</td>
     <td style="text-align:right"><output id="lightingTotal" type="text"></td>
+    <td></td>    
   </tr>
   <tr style="background-color: #e0e0e0">
     <td>&nbsp;  Lighting1</td>
     <td style="text-align:right"><output id="lighting1" type="text"></td>
+    <td style="text-align:center"><select id="statusLight1">  <option value="1">On  <option value="0">Off &nbsp;</select></td>
   </tr>
   <tr style="background-color: #e0e0e0">
     <td>&nbsp;  Lighting2</td>
     <td style="text-align:right"><output id="lighting2" type="text"></td>
+    <td style="text-align:center"><select id="statusLight2">  <option value="1">On  <option value="0">Off &nbsp;</select></td>
   </tr>
   <tr>
     <td>PlugTotal</td>
     <td style="text-align:right"><output id="plugTotal" type="text"></td>
+    <td></td>
   </tr>
   <tr style="background-color: #e0e0e0">
     <td>&nbsp;  Plug1 - Refrigerator</td>
     <td style="text-align:right"><output id="plug1" type="text"></td>
+    <td style="text-align:center"><select id="statusPlug1">  <option value="1">On  <option value="0">Off &nbsp;</select></td>
   </tr>
   <tr style="background-color: #e0e0e0">
     <td>&nbsp;  Plug2 - TV42</td>
     <td style="text-align:right"><output id="plug2" type="text"></td>
+    <td style="text-align:center"><select id="statusPlug2">  <option value="1">On  <option value="0">Off &nbsp;</select></td>
   </tr>
 </table>
 
@@ -193,25 +202,29 @@ th {
 </br></br>
 <table>
   <tr>
-    <th>Current Water</th>
-    <th>Consumption</th>
+    <th>Water Sources</th>
+    <th>Current Value</th>
+    <th>Actions</th>
   </tr>
   <tr>
     <td>Water Total</td>
     <td style="text-align:right"><output id="waterTotal" size = "10"></td>
+    <td></td>
   </tr>
   <tr style="background-color: #e0e0e0">
     <td>&nbsp;  Water1 - Shower</td>
     <td style="text-align:right"><output id="water1" type="text"></td>
+    <td style="text-align:center"><select id="statusWater1">  <option value="1">Open  <option value="0">Closed &nbsp;</select></td>
   </tr>
   <tr style="background-color: #e0e0e0">
     <td>&nbsp;  Water2 - Water Tap</td>
     <td style="text-align:right"><output id="water2" type="text"></td>
+    <td style="text-align:center"><select id="statusWater2">  <option value="1">Open  <option value="0">Closed &nbsp;</select></td>
   </tr>
 </table>
   </header>
     </br></br></br>
-  <!-- Header Water - End -->
+  <!-- Header Water -End -->
 
   
 <div class="iew-black iew-center iew-padding-24">System IoEnergyWater</a></div>
@@ -235,11 +248,6 @@ function iew_logout() {water1
     header("location:logout.php");
 }
 </script>
-
-<select id="mySelect" onchange="myFunction()">
-  <option value="on">On
-  <option value="off">Off
-</select>
 
 </body>
 

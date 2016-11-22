@@ -1,11 +1,3 @@
-function myFunction() {
-    x = document.getElementById("mySelect").value;
-    if (x != "on"){
-	x = "off";
-	}
-    //document.getElementById("demo").innerHTML = "You selected: " + x;
-}
-
 function main(){
 	var nowValue = new Date();			
 	var demo = nowValue.getSeconds();
@@ -24,25 +16,22 @@ function homeSimulation(){
 	}
 
 function waterVar(){ 
-	//main();
-        water1 = parseFloat((15*value).toFixed(2));
-        water2 = parseFloat((10*value).toFixed(2));
+        water1 = conditionVariables(document.getElementById("statusWater1").value, "0", 15)
+        water2 = conditionVariables(document.getElementById("statusWater2").value, "0", 10)
         waterTotal = parseFloat((water1 + water2).toFixed(2));
 	}
 
 function waterSimulation(){ 
-	//main();
 	waterVar();
-
-        document.getElementById("waterTotal").innerHTML = waterTotal + " L/min ";
+        document.getElementById("waterTotalHome").innerHTML = waterTotal + " L/min ";
         document.getElementById("water1").innerHTML = water1 + " L/min";
         document.getElementById("water2").innerHTML = water2 + " L/min";
-
-	setTimeout("waterSimulation()",2000);
+	document.getElementById("waterTotal").innerHTML = waterTotal + " L/min ";
+	//setTimeout("waterSimulation()",2000);
 	}
 
 function conditionVariables(statusVar, statusAlarm, baseValue){
-          if(statusVar == "on" && statusAlarm == "off"){
+          if(statusVar == "1" && statusAlarm == "0"){
              result = parseFloat((baseValue*value).toFixed(2));}
            else {
              result = parseFloat((0).toFixed(2));
@@ -51,28 +40,19 @@ function conditionVariables(statusVar, statusAlarm, baseValue){
 }
 
 function energyVar(){
-        myFunction()
-        //statusAir = x;
-        air = conditionVariables(x, "off", 1000)
-          /*if(statusAir == "on" && alarmAir == "off"){
-             air = parseFloat((1000*value).toFixed(2));}
-           else {
-             air = parseFloat((0).toFixed(2));
-          }*/
-            shower = parseFloat((3000*value).toFixed(2));
-            light1 = parseFloat((15*value).toFixed(2));
-            light2 = parseFloat((60*value).toFixed(2));
-            lightTotal = parseFloat((light1 + light2).toFixed(2));
-            plug1 = parseFloat((50*value).toFixed(2));
-            plug2 = parseFloat((110*value).toFixed(2));
-            plugTotal = parseFloat((plug1 + plug2).toFixed(2));
-	    energyTotal = parseFloat((air+shower+lightTotal+plugTotal).toFixed(2));	
+        air = conditionVariables(document.getElementById("statusAir").value, "0", 1000)
+	shower = conditionVariables(document.getElementById("statusShower").value, "0", 3000)
+        light1 = conditionVariables(document.getElementById("statusLight1").value, "0", 15)
+	light2 = conditionVariables(document.getElementById("statusLight2").value, "0", 60)
+        plug1 = conditionVariables(document.getElementById("statusPlug1").value, "0", 50)
+	plug2 = conditionVariables(document.getElementById("statusPlug2").value, "0", 110)
+	lightTotal = parseFloat((light1 + light2).toFixed(2));
+        plugTotal = parseFloat((plug1 + plug2).toFixed(2));
+	energyTotal = parseFloat((air+shower+lightTotal+plugTotal).toFixed(2));	
 	}
 
 function energySimulation(){ 
-	//main();
-	energyVar();
-      
+	energyVar();   
             document.getElementById("airCond").innerHTML = air + " W " ;
             document.getElementById("eShower").innerHTML = shower + " W ";
             document.getElementById("lightingTotal").innerHTML = lightTotal + " W ";
@@ -81,7 +61,6 @@ function energySimulation(){
             document.getElementById("plugTotal").innerHTML = plugTotal + " W";
             document.getElementById("plug1").innerHTML = plug1 + " W";
             document.getElementById("plug2").innerHTML = plug2 + " W";
-
-	setTimeout("energySimulation()",2000);
+	//setTimeout("energySimulation()",2000);
 	}
 
