@@ -186,6 +186,11 @@ function iew_logout() {
     header("location:logout.php");
 }
 </script>
+<p id="demo"></p>
+<select id="mySelect" onchange="myFunction()">
+  <option value="on">On
+  <option value="off">Off
+</select>
 
 </body>
 

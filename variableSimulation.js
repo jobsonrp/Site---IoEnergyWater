@@ -1,13 +1,21 @@
+function myFunction() {
+    x = document.getElementById("mySelect").value;
+    if (x != "on"){
+	x = "off";
+	}
+    //document.getElementById("demo").innerHTML = "You selected: " + x;
+}
+
 function main(){
 	var nowValue = new Date();			
 	var demo = nowValue.getSeconds();
 	value = (0.09/59)*demo+0.9;
-	}
+}
 
 function homeSimulation(){
 	main();
-	waterVar();
-	energyVar();
+	waterSimulation();
+	energySimulation();
 
         document.getElementById("waterTotal").innerHTML = waterTotal + " L/min ";
 	document.getElementById("energyTotal").innerHTML = energyTotal + " W ";
@@ -16,14 +24,14 @@ function homeSimulation(){
 	}
 
 function waterVar(){ 
-	main();
+	//main();
         water1 = parseFloat((15*value).toFixed(2));
         water2 = parseFloat((10*value).toFixed(2));
         waterTotal = parseFloat((water1 + water2).toFixed(2));
 	}
 
 function waterSimulation(){ 
-	main();
+	//main();
 	waterVar();
 
         document.getElementById("waterTotal").innerHTML = waterTotal + " L/min ";
@@ -33,9 +41,24 @@ function waterSimulation(){
 	setTimeout("waterSimulation()",2000);
 	}
 
-function energyVar(){ 
-	main();
-            air = parseFloat((1000*value).toFixed(2));
+function conditionVariables(statusVar, statusAlarm, baseValue){
+          if(statusVar == "on" && statusAlarm == "off"){
+             result = parseFloat((baseValue*value).toFixed(2));}
+           else {
+             result = parseFloat((0).toFixed(2));
+          }
+	return result;
+}
+
+function energyVar(){
+        myFunction()
+        //statusAir = x;
+        air = conditionVariables(x, "off", 1000)
+          /*if(statusAir == "on" && alarmAir == "off"){
+             air = parseFloat((1000*value).toFixed(2));}
+           else {
+             air = parseFloat((0).toFixed(2));
+          }*/
             shower = parseFloat((3000*value).toFixed(2));
             light1 = parseFloat((15*value).toFixed(2));
             light2 = parseFloat((60*value).toFixed(2));
@@ -47,10 +70,10 @@ function energyVar(){
 	}
 
 function energySimulation(){ 
-	main();
+	//main();
 	energyVar();
-
-	    document.getElementById("airCond").innerHTML = air + " W " ;
+      
+            document.getElementById("airCond").innerHTML = air + " W " ;
             document.getElementById("eShower").innerHTML = shower + " W ";
             document.getElementById("lightingTotal").innerHTML = lightTotal + " W ";
             document.getElementById("lighting1").innerHTML = light1 + " W";

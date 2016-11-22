@@ -81,9 +81,9 @@ th {
     <h4 class="iew-padding-0"><b>System</b></h4>
     <p class="iew-text-grey">IoEnergyWater</p>
   </div>
-  <a href="#login" onclick="iew_close()" class="iew-padding iew-text-teal"><i class="fa fa-th-large fa-fw iew-margin-right"></i>LOGIN</a>
-  <a href="#about" onclick="iew_close()" class="iew-padding"><i class="fa fa-user fa-fw iew-margin-right"></i>ABOUT</a>
-  <a href="#contact" onclick="iew_close()" class="iew-padding"><i class="fa fa-envelope fa-fw iew-margin-right"></i>CONTACT</a>
+  <a href="#home" onclick="iew_close()" class="iew-padding iew-text-teal"><i class="fa fa-th-large fa-fw iew-margin-right"></i>HOME</a>
+  <a href="#energy" onclick="iew_close()" class="iew-padding"><i class="fa fa-user fa-fw iew-margin-right"></i>ENERGY</a>
+  <a href="#water" onclick="iew_close()" class="iew-padding"><i class="fa fa-envelope fa-fw iew-margin-right"></i>WATER</a>
   <a href="logout.php" class="iew-padding"><i class="fa fa-envelope fa-fw iew-margin-right"></i>LOGOUT</a>   
  
   <div class="iew-section iew-padding-top iew-large">
@@ -112,18 +112,21 @@ th {
     <span class="iew-opennav iew-hide-large iew-xxlarge iew-hover-text-grey" onclick="iew_open()"><i class="fa fa-bars"></i></span>
     <h2 style="text-shadow: 2px 2px 2px white"><b>IoEnergyWater</b></h2>
     <div class="iew-section iew-padding-16">
-      <a href="home.php" class="iew-btn">Home</a>
-      <a href="energy.php" class="iew-btn iew-white">Energy</a>
-      <a href="water.php" class="iew-btn iew-white">Water</a>
+      <a href="#home" class="iew-btn">Home</a>
+      <a href="#energy" class="iew-btn iew-white">Energy</a>
+      <a href="#water" class="iew-btn iew-white">Water</a>
     </div>
   </header>
   
 <div class="iew-container iew-padding-large" style="margin-bottom:10px">
-<h3 class="iew-hide-small iew-hide-medium"></br></h3>
-<form action="#">
+<h3 class="iew-hide-small iew-hide-medium"></h3>
+
+  <!-- Header Home - Begin -->
+  <header class="w3-container" id="home">
+</br>
 <table>
   <tr>
-    <th>Current Water</th>
+    <th>General</th>
     <th>Consumption</th>
   </tr>
   <tr>
@@ -135,12 +138,83 @@ th {
     <td style="text-align:right"><output id="energyTotal" size = "10"></td>
   </tr>
 </table>
-</form>
-    </br>
-  </br>
-</br>
+</header>
+    </br></br></br>
+  <!-- Header Home - End -->
+
+  <!-- Header Energy - Begin -->
+  <header class="w3-container" id="energy">
+</br></br>
+<table>
+  <tr>
+    <th>Current Energy</th>
+    <th>Consumption</th>
+  </tr>
+  <tr>
+    <td>AirConditioning</td>
+    <td style="text-align:right"><output id="airCond" size = "10"><br/></strong></td>
+  </tr>
+  <tr>
+    <td>Electric Shower</td>
+    <td style="text-align:right"><output id="eShower" type="text"> <br /></strong></td>
+  </tr>
+  <tr>
+    <td>LightingTotal</td>
+    <td style="text-align:right"><output id="lightingTotal" type="text"></td>
+  </tr>
+  <tr style="background-color: #e0e0e0">
+    <td>&nbsp;  Lighting1</td>
+    <td style="text-align:right"><output id="lighting1" type="text"></td>
+  </tr>
+  <tr style="background-color: #e0e0e0">
+    <td>&nbsp;  Lighting2</td>
+    <td style="text-align:right"><output id="lighting2" type="text"></td>
+  </tr>
+  <tr>
+    <td>PlugTotal</td>
+    <td style="text-align:right"><output id="plugTotal" type="text"></td>
+  </tr>
+  <tr style="background-color: #e0e0e0">
+    <td>&nbsp;  Plug1 - Refrigerator</td>
+    <td style="text-align:right"><output id="plug1" type="text"></td>
+  </tr>
+  <tr style="background-color: #e0e0e0">
+    <td>&nbsp;  Plug2 - TV42</td>
+    <td style="text-align:right"><output id="plug2" type="text"></td>
+  </tr>
+</table>
+
+  </header>
+    </br></br></br>
+  <!-- Header Energy - End -->
+
+  <!-- Header Water - Begin -->
+  <header class="w3-container" id="water">
+</br></br>
+<table>
+  <tr>
+    <th>Current Water</th>
+    <th>Consumption</th>
+  </tr>
+  <tr>
+    <td>Water Total</td>
+    <td style="text-align:right"><output id="waterTotal" size = "10"></td>
+  </tr>
+  <tr style="background-color: #e0e0e0">
+    <td>&nbsp;  Water1 - Shower</td>
+    <td style="text-align:right"><output id="water1" type="text"></td>
+  </tr>
+  <tr style="background-color: #e0e0e0">
+    <td>&nbsp;  Water2 - Water Tap</td>
+    <td style="text-align:right"><output id="water2" type="text"></td>
+  </tr>
+</table>
+  </header>
+    </br></br></br>
+  <!-- Header Water - End -->
+
   
-  <div class="iew-black iew-center iew-padding-24">System IoEnergyWater</a></div>
+<div class="iew-black iew-center iew-padding-24">System IoEnergyWater</a></div>
 
 <!-- End page content -->
 </div>
@@ -161,6 +235,11 @@ function iew_logout() {water1
     header("location:logout.php");
 }
 </script>
+
+<select id="mySelect" onchange="myFunction()">
+  <option value="on">On
+  <option value="off">Off
+</select>
 
 </body>
 
