@@ -21,41 +21,20 @@
 		</script> 
 <script>
 $(document).ready(function(){
-	$("configAlarm").hide();
-        $("btnShowAlarm").show();
-        $("btnHideAlarm").hide();
-        $("addAlarm").hide();
-        $("editAlarm").hide();
-        $("delAlarm").hide();
     $("#hide").click(function(){
-        $("configAlarm").hide();
-        $("btnShowAlarm").show();
-        $("btnHideAlarm").hide();
-        $("addAlarm").hide();
-        $("editAlarm").hide();
-        $("delAlarm").hide();
+        $("p22").hide();
+        $("p26").show();
+        $("p27").hide();
+        $("p23").hide();
     });
     $("#show").click(function(){
-        $("configAlarm").show();
-        $("btnHideAlarm").show();
-        $("btnShowAlarm").hide();
+        $("p22").show();
+        $("p27").show();
+        $("p26").hide();
     });
-    $("#showAddAlarm").click(function(){
-        $("editAlarm").hide();
-        $("delAlarm").hide();
-        $("addAlarm").show();
+    $("#addAlarm").click(function(){
+        $("p23").show();
     });
-    $("#showEditAlarm").click(function(){
-        $("addAlarm").hide();
-        $("delAlarm").hide();
-        $("editAlarm").show();
-    });
-    $("#showDelAlarm").click(function(){
-        $("addAlarm").hide();
-        $("editAlarm").hide();
-        $("delAlarm").show();
-    });
-
 });
 </script>
 
@@ -285,7 +264,7 @@ th {
   </tr>
 <?php
 $table = "energy_devices";
-include("connect.inc");
+$connect = mysqli_connect("localhost", "u473462906_job", "123456","u473462906_iew");
 $result = mysqli_query($connect,"SELECT * FROM $table WHERE alarm_added = 'yes'") or die("erro ao selecionar");
 while($reg=mysqli_fetch_row($result)) {
     echo "<tr>";
@@ -313,78 +292,64 @@ mysqli_close($connect);
 </table>
 
   </header>
-</br></br></br>
+    </br></br></br>
   <!-- Header Alarm Energy - End -->
 
 
   <!-- Header Alarms - Begin -->
-<header class="iew-container" id="alarmConfig" align="center"></br>
+  <header class="iew-container" id="alarmConfig" align="center">
+</br>
 
-        <btnShowAlarm>
-		<a href="#alarmConfig" class="iew-btn iew-black" id="show"><h3>Alarm Configuration >></h3></a>
-	</btnShowAlarm>
+<p26>
+<button id="show">Alarm Configuration >></button>
+</p26>
 
-	<btnHideAlarm>
-		<a href="#alarmConfig" class="iew-btn iew-black" id="hide"><h3><< Alarm Configuration</h3></a>
-	</btnHideAlarm>
+<p27>
+<button id="hide"><< Alarm Configuration</button>
+</p27>
 
-      <div class="iew-section iew-bottombar iew-padding-8" align="center">
-	<configAlarm>
-	       <span class="iew-btn iew-white" align="center"><h4><a href=""></a></span>
-	<form id="form1" align="center" name="form1">
-        	<div class="control-group">
-		   <h4 style="color:black;"><b>Select Option</b></h4>
-	           <div class="controls" align="center"></br>
-			<a href="#alarmConfig" class="iew-btn iew-white" id="showAddAlarm"><h4>Add</h4></a>
-			<a href="#alarmConfig" class="iew-btn iew-white" id="showEditAlarm"><h4>Edit</h4></a>
-			<a href="#alarmConfig" class="iew-btn iew-white" id="showDelAlarm"><h4>Delete</h4></a>
-                   </div></h4>
-                </div>
-        </form>
-        </configAlarm> 
+<p22>
+    <div class="iew-section iew-bottombar iew-padding-16">
+       <span class="iew-btn iew-white"><h3><a href=""></a></span>
+    <form id="form1" align="center" name="form1">
 
-	<addAlarm>
-		  <span class="iew-btn iew-white"><h4><a href=""></a></span>
-		    <form id="form1" align="center" name="form1" method="POST" action="crudAlarms.php">
-		              <input id="deviceIdAlarm" name="deviceIdAlarm" type="text" placeholder="Device Id">
-		           <div class="controls"></br>
-		              <input id="maxValueAlarm" name="maxValueAlarm" type="text" placeholder="Maximum Value">
-			   </div>
-           		   <div class="controls"></br>
-		              <button class="iew-btn iew-black" id="enter" name="enter" value="add">Add</button>
-                           </div></h4>
-                    </form>
-	</addAlarm>
+        <div class="control-group">
+   
+           <div class="controls"></br>
+      <input size="4px" id="deviceIdAlarm" name="deviceIdAlarm" type="integer" placeholder="Id">
+      <button class="iew-btn iew-black" id="addAlarm" name="enter" onclick="window.location=consultId.php">Add</button>
+      <button class="iew-btn iew-black" id="enter" name="enter">Edit</button>
+      <button class="iew-btn iew-black" id="enter" name="enter">Delet</button>
 
-	<editAlarm>
-		  <span class="iew-btn iew-white"><h4><a href=""></a></span>
-		    <form id="form1" align="center" name="form1" method="POST" action="crudAlarms.php">
-		              <input id="deviceIdAlarm" name="deviceIdAlarm" type="text" placeholder="Device Id">
-		           <div class="controls"></br>
-		              <input id="maxValueAlarm" name="maxValueAlarm" type="text" placeholder="Maximum Value">
-			   </div>
-           		   <div class="controls"></br>
-              		      <button class="iew-btn iew-black" id="enter" name="enter" value="edit">Edit</button>
-                           </div></h4>
-                    </form>
-	</editAlarm>
+           </div>
+         </h3>
+        </div>  
+      </form>
 
-	<delAlarm>
-		  <span class="iew-btn iew-white"><h4><a href=""></a></span>
-		    <form id="form1" align="center" name="form1" method="POST" action="crudAlarms.php">
-		              <input id="deviceIdAlarm" name="deviceIdAlarm" type="text" placeholder="Device Id">
-           		   <div class="controls"></br>
-              		      <button class="iew-btn iew-black" id="enter" name="enter" value="del">Delete</button>
-                           </div></h4>
-                    </form>
-	</delAlarm>
+<p23>
+    <div class="iew-section iew-bottombar iew-padding-16">
+       <span class="iew-btn iew-white"><h3><a href=""></a></span>
+    <form id="form2" align="center" name="form2" method="POST" action="addAlarm.php" onsubmit="return validar(this);">
+        <div class="control-group"> 
+        <div class="controls"></br>
+           <input id="maxValueAlarm" name="maxValueAlarm" type="text" placeholder="Maximum Value"></div>
+  
+        <div class="controls"></br>
+      <button class="iew-btn iew-black" id="enter" name="enter">Add Alarm</button></div></h3>
+     </div>
+   </form>
+</div>
+</p23>
+
+   </div>
+</p22>
 
 
   </header>
  <!-- Header Alarms - End -->
-</br></br>
- <div class="iew-black iew-center iew-padding-24"><h3>System IoEnergyWater</h3></div>
-</div>
+ 
+<div class="iew-black iew-center iew-padding-24">System IoEnergyWater</a></div>
+
 <!-- End page content -->
 </div>
 

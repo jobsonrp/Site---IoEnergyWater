@@ -77,8 +77,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <h2 style="text-shadow: 2px 2px 2px white"><b>IoEnergyWater</b></h2>
     <div class="iew-section iew-padding-16">
       <a href="home.php" class="iew-btn iew-white">Home</a>
-      <a href="energy.php" class="iew-btn iew-white">Energy</a>
-      <a href="water.php" class="iew-btn iew-white">Water</a>
+      <a href="home.php" class="iew-btn iew-white">Energy</a>
+      <a href="home.php" class="iew-btn iew-white">Water</a>
     </div>
   </header>
 

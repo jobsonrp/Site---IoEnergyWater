@@ -5,7 +5,7 @@ if(isset($_POST['inputEmail']))
 if(isset($_POST['inputPassword']))
     $senha=$_POST['inputPassword'];
   $entrar = $_POST['enter'];
-  $connect = mysqli_connect("localhost", "u473462906_job", "123456","u473462906_iew");
+  include("connect.inc");
     if (isset($entrar)) {
             
       $verifica = mysqli_query($connect,"SELECT * FROM user WHERE email = '$login' AND password = '$senha'") or die("erro ao selecionar");
@@ -20,5 +20,6 @@ if(isset($_POST['inputPassword']))
            header('location:home.php');
         }
     }
+mysqli_close($connect);
 ?>
 	
