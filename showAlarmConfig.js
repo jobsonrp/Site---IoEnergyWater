@@ -1,0 +1,39 @@
+src="https://code.jquery.com/jquery-1.11.2.js"
+
+$(document).ready(function(){
+	$("configAlarm").hide();
+        $("btnShowAlarm").show();
+        $("btnHideAlarm").hide();
+        $("addAlarm").hide();
+        $("editAlarm").hide();
+        $("delAlarm").hide();
+    $("#hide").click(function(){
+        $("configAlarm").hide();
+        $("btnShowAlarm").show();
+        $("btnHideAlarm").hide();
+        $("addAlarm").hide();
+        $("editAlarm").hide();
+        $("delAlarm").hide();
+    });
+    $("#show").click(function(){
+        $("configAlarm").show();
+        $("btnHideAlarm").show();
+        $("btnShowAlarm").hide();
+    });
+    $("#showAddAlarm").click(function(){
+        $("editAlarm").hide();
+        $("delAlarm").hide();
+        $("addAlarm").show();
+    });
+    $("#showEditAlarm").click(function(){
+        $("addAlarm").hide();
+        $("delAlarm").hide();
+        $("editAlarm").show();
+    });
+    $("#showDelAlarm").click(function(){
+        $("addAlarm").hide();
+        $("editAlarm").hide();
+        $("delAlarm").show();
+    });
+
+});

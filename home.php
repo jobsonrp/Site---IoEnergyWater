@@ -12,8 +12,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+		<script src="validForms.js"></script>
 		<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-
+		<script src="variableSimulation.js"></script>
 		<script type="text/javascript">
 			jQuery(window).load(function($){
 				homeSimulation();
@@ -61,12 +62,12 @@ $(document).ready(function(){
 
 <title>IoEnergyWater</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://ioenergywater.pe.hu/iew.css">
+<link rel="stylesheet" href="/iew.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <style class="iew-hide-small">
 body {
-    background: url("http://ioenergywater.pe.hu/images/site_home.png"), url("http://ioenergywater.pe.hu/images/fundo_meio9a.png");
+    background: url("/images/site_home.png"), url("/images/backgroundBlue.png");
     background-position: top center, top;
     background-size: auto, 100%;
     background-repeat: no-repeat, repeat;
@@ -110,21 +111,19 @@ th {
 
 </strong></font></td>
 
-<td align='right'><font size="4" color="#000000"><strong></br> 
+<h5 class="iew-text-grey" align='left'>
 <?php echo "Username : $login"; ?>
 </br>
 <?php echo "CPF : $cpf"; ?>
-  
-</strong></font></td>
-  
-    <br><br>
-    <h4 class="iew-padding-0"><b>System</b></h4>
-    <p class="iew-text-grey">IoEnergyWater</p>
+</h5>
+
+    <h4 class="iew-text-black"><b>IoEnergyWater System</b></h4><br>
   </div>
   <a href="#home" onclick="iew_close()" class="iew-padding iew-text-teal"><i class="fa fa-th-large fa-fw iew-margin-right"></i>HOME</a>
-  <a href="#energy" onclick="iew_close()" class="iew-padding"><i class="fa fa-user fa-fw iew-margin-right"></i>ENERGY</a>
-  <a href="#water" onclick="iew_close()" class="iew-padding"><i class="fa fa-envelope fa-fw iew-margin-right"></i>WATER</a>
-  <a href="#alarm" onclick="iew_close()" class="iew-padding"><i class="fa fa-envelope fa-fw iew-margin-right"></i>ALARMS</a>
+  <a href="#energy" onclick="iew_close()" class="iew-padding"><i class="fa fa-lightbulb-o fa-fw iew-margin-right"></i>ENERGY</a>
+  <a href="#water" onclick="iew_close()" class="iew-padding"><i class="fa fa-tint fa-fw iew-margin-right"></i>WATER</a>
+  <a href="#alarm" onclick="iew_close()" class="iew-padding"><i class="fa fa-warning fa-fw iew-margin-right"></i>ALARMS</a>
+  <a href="contact.php" onclick="iew_close()" class="iew-padding"><i class="fa fa-contao fa-fw iew-margin-right"></i>CONTACT</a>
   <a href="logout.php" class="iew-padding"><i class="fa fa-user fa-fw iew-margin-right"></i>LOGOUT</a>   
  
   <div class="iew-section iew-padding-top iew-large">
@@ -283,33 +282,9 @@ th {
     <th>Max-Value</th>
     <th>Status</th>
   </tr>
-<?php
-$table = "energy_devices";
-include("connect.inc");
-$result = mysqli_query($connect,"SELECT * FROM $table WHERE alarm_added = 'yes'") or die("erro ao selecionar");
-while($reg=mysqli_fetch_row($result)) {
-    echo "<tr>";
-    echo "<td align='right'>$reg[0]</td>";
-    echo "<td>$reg[1]</td>";
-    echo "<td align='center'><input id='maxValue$reg[0]' size='4px' style='border:none; background:white; color:black;' disabled value=$reg[4]></input></td>";
-    echo "<input type='hidden' id='statusValue$reg[0]' size='4px' value=$reg[5]></input>";
-    if ($reg[5] == "on"){
-        $option1 = "On";
-        $op1 = '1'; 
-        $option2 = "Off";
-        $op2 = '0';   	    
-	} else {
-        $option1 = "Off";
-        $op1 = '0'; 
-        $option2 = "On";
-        $op2 = '1'; 
-     }   
-    echo "<td style='text-align:center'><select id='alarm$reg[0]' onchange='myFunction($reg[0])' >  <option value=$op1>$option1  <option value=$op2>$option2 &nbsp;</select></td>";
-    echo "</tr>";
 
-}
-mysqli_close($connect);
-?>
+<?php include 'tableAlarms.php';?>
+
 </table>
 
   </header>
@@ -345,8 +320,8 @@ mysqli_close($connect);
 
 	<addAlarm>
 		  <span class="iew-btn iew-white"><h4><a href=""></a></span>
-		    <form id="form1" align="center" name="form1" method="POST" action="crudAlarms.php">
-		              <input id="deviceIdAlarm" name="deviceIdAlarm" type="text" placeholder="Device Id">
+		    <form id="form2" align="center" name="form2" method="POST" action="crudAlarms.php" onsubmit="return validAdd(this);">
+		              <input id="deviceIdAlarm" name="deviceIdAlarm" type="text" placeholder="Device ID">
 		           <div class="controls"></br>
 		              <input id="maxValueAlarm" name="maxValueAlarm" type="text" placeholder="Maximum Value">
 			   </div>
@@ -358,8 +333,8 @@ mysqli_close($connect);
 
 	<editAlarm>
 		  <span class="iew-btn iew-white"><h4><a href=""></a></span>
-		    <form id="form1" align="center" name="form1" method="POST" action="crudAlarms.php">
-		              <input id="deviceIdAlarm" name="deviceIdAlarm" type="text" placeholder="Device Id">
+		    <form id="form3" align="center" name="form3" method="POST" action="crudAlarms.php" onsubmit="return validEdit(this);">
+		              <input id="deviceIdAlarm" name="deviceIdAlarm" type="text" placeholder="Device ID">
 		           <div class="controls"></br>
 		              <input id="maxValueAlarm" name="maxValueAlarm" type="text" placeholder="Maximum Value">
 			   </div>
@@ -371,7 +346,7 @@ mysqli_close($connect);
 
 	<delAlarm>
 		  <span class="iew-btn iew-white"><h4><a href=""></a></span>
-		    <form id="form1" align="center" name="form1" method="POST" action="crudAlarms.php">
+		    <form id="form4" align="center" name="form4" method="POST" action="crudAlarms.php" onsubmit="return validDel(this);">
 		              <input id="deviceIdAlarm" name="deviceIdAlarm" type="text" placeholder="Device Id">
            		   <div class="controls"></br>
               		      <button class="iew-btn iew-black" id="enter" name="enter" value="del">Delete</button>
@@ -400,13 +375,10 @@ function iew_close() {
     document.getElementById("myOverlay").style.display = "none";
 }
 
-function iew_logout() {water1
+function iew_logout() {
     header("location:logout.php");
 }
 </script>
-
-      <input type="button" value=" &nbsp;Listar&nbsp;&nbsp; " 
-             onclick="window.location='testeBD.php'"></td></tr>
 
 <script>
 function myFunction(idAlarm) {
@@ -415,14 +387,10 @@ statusAlarm = document.getElementById("statusValue"+idAlarm).value;
         changeValue = "off";
     } else {
         changeValue = "on"; }
-    //window.location.href='tableEnergy.php?idAlrm='+idAlarm;
     window.location.href='tableEnergy.php?idAlrm='+idAlarm+'&changeStatus='+changeValue;
-    //header("location:tableEnergy.php?id="+idAlarm);
 }
 </script>
 
 </body>
-
-<script src="variableSimulation.js"></script>
 
 </html>

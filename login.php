@@ -10,7 +10,7 @@ if(isset($_POST['inputPassword']))
             
       $verifica = mysqli_query($connect,"SELECT * FROM user WHERE email = '$login' AND password = '$senha'") or die("erro ao selecionar");
         if (mysqli_num_rows($verifica)<=0){
-          echo"<script language='javascript' type='text/javascript'>alert('Login e/ou senha incorretos');window.location.href='Home/';</script>";
+          echo"<script language='javascript' type='text/javascript'>alert('Login e/ou senha incorretos');window.location.href='index.php';</script>";
           die();
         }else{
            $_SESSION["status"] = "1";
@@ -21,5 +21,5 @@ if(isset($_POST['inputPassword']))
         }
     }
 mysqli_close($connect);
-?>
+?> 
 	
