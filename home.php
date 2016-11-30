@@ -14,7 +14,7 @@
 <head>
 		<script src="validForms.js"></script>
 		<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-		<script src="variableSimulation.js"></script>
+
 		<script type="text/javascript">
 			jQuery(window).load(function($){
 				homeSimulation();
@@ -161,26 +161,54 @@ th {
 <div class="iew-container iew-padding-large" style="margin-bottom:10px">
 <h3 class="iew-hide-small iew-hide-medium"></h3>
 
-  
   <!-- Header Home -Begin -->
   <header class="w3-container" id="home">
 </br>
 <h3 style="color:white;"><b>General Information</b></h3>
 <table>
   <tr>
-    <th>General Consumption</th>
+    <th>Energy General</th> 
     <th>Current Value</th>
+    <th>Input Hour (Solar)</th>
+  </tr>
+  <tr>
+    <td>Energy Produced</td>
+    <td style="text-align:right"><output id="energyProduced" size = "10"></td>
+    <td style="text-align:center"><input id="hourSolarInput" size="5px" value="12" style="text-align:center"> (0-24h)</input></td>
+  </tr>
+  <tr>
+    <td>Total Consumed</td>
+    <td style="text-align:right"><output id="energyTotal" size = "10"></td>
+  </tr>
+  <tr>
+    <td>Battery Charge</td>
+<input type='hidden' id='batteryInicial' size='4px' value=100></input>
+    <td style="text-align:right"><output id="batteryCharge" size = "10" value="0"></td>
+  </tr>
+</table>
+  <!-- Header Home - End -->
+
+  <!-- Header Home -Begin -->
+</br>
+<table>
+  <tr>
+    <th>Water General Consumption</th>
+    <th>Current Value</th>
+    <th>Input Rain (%)</th>
+  </tr>
+  <tr>
+    <td>Stored Water</td>
+<input type='hidden' id='storedWaterInicial' size='4px' value=30></input>
+    <td style="text-align:right"><output id="storedWater" size = "10"></td>
+    <td style="text-align:center"><input id="rainInput" size="5px" value=50 style="text-align:center"> (0-100)</input></td>
   </tr>
   <tr>
     <td>Water Total</td>
     <td style="text-align:right"><output id="waterTotalHome" size = "10"></td>
   </tr>
-  <tr>
-    <td>Energy Total</td>
-    <td style="text-align:right"><output id="energyTotal" size = "10"></td>
-  </tr>
 </table>
 </header>
+
     </br></br></br>
   <!-- Header Home - End -->
 
@@ -197,12 +225,12 @@ th {
   <tr>
     <td>AirConditioning</td>
     <td style="text-align:right"><output id="airCond" size = "10"><br/></strong></td>
-    <td style="text-align:center"><select id="statusAir">  <option value="1">On  <option value="0">Off &nbsp;</select></td>	
+    <td style="text-align:center"><select id="statusAir">  <option value="0">Off &nbsp; <option value="1">On </select></td>	
   </tr>
   <tr>
     <td>Electric Shower</td>
     <td style="text-align:right"><output id="eShower" type="text"> <br /></strong></td>
-    <td style="text-align:center"><select id="statusShower">  <option value="1">On  <option value="0">Off &nbsp;</select></td>
+    <td style="text-align:center"><select id="statusShower">  <option value="0">Off &nbsp; <option value="1">On </select></td>
   </tr>
   <tr>
     <td>LightingTotal</td>
@@ -262,14 +290,13 @@ th {
   </tr>
   <tr style="background-color: #e0e0e0">
     <td>&nbsp;  Water2 - Water Tap</td>
-    <td style="text-align:right"><output id="water2" type="text"></td>
+    <td style="text-align:right"><output id="water2" ></td>
     <td style="text-align:center"><select id="statusWater2">  <option value="1">Open  <option value="0">Closed &nbsp;</select></td>
   </tr>
 </table>
   </header>
     </br></br></br>
   <!-- Header Water -End -->
-
 
 <!-- Header Alarm Energy - Begin maximum value -->
   <header class="w3-container" id="alarm">
@@ -381,16 +408,27 @@ function iew_logout() {
 </script>
 
 <script>
-function myFunction(idAlarm) {
-statusAlarm = document.getElementById("statusValue"+idAlarm).value;
+function updateStatus(idAlarm) {
+statusAlarm = document.getElementById("statusAlarm"+idAlarm).value;
     if(statusAlarm == "on"){
         changeValue = "off";
     } else {
         changeValue = "on"; }
-    window.location.href='tableEnergy.php?idAlrm='+idAlarm+'&changeStatus='+changeValue;
+    window.location.href='updateAlarm.php?idAlrm='+idAlarm+'&changeStatus='+changeValue;
+}
+
+function updateStatusVar(idVar) {
+statusVar = document.getElementById("statusVar"+idVar).value;
+    if(statusVar == "on"){
+        changeValue = "off";
+    } else {
+        changeValue = "on"; }
+    window.location.href='UpdateStatusVar.php?idVar='+idVar+'&changeStatus='+changeValue;
 }
 </script>
 
 </body>
+
+<script src="SimuVariables.js"></script>
 
 </html>

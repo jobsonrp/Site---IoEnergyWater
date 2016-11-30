@@ -7,7 +7,7 @@ while($reg=mysqli_fetch_row($result)) {
     echo "<td align='right'>$reg[0]</td>";
     echo "<td>$reg[1]</td>";
     echo "<td align='center'><input id='maxValue$reg[0]' size='4px' style='border:none; background:white; color:black;' disabled value=$reg[4]></input></td>";
-    echo "<input type='hidden' id='statusValue$reg[0]' size='4px' value=$reg[5]></input>";
+    echo "<input type='hidden' id='statusAlarm$reg[0]' size='4px' value=$reg[5]></input>";
     if ($reg[5] == "on"){
         $option1 = "On";
         $op1 = '1'; 
@@ -19,7 +19,7 @@ while($reg=mysqli_fetch_row($result)) {
         $option2 = "On";
         $op2 = '1'; 
      }   
-    echo "<td style='text-align:center'><select id='alarm$reg[0]' onchange='myFunction($reg[0])' >  <option value=$op1>$option1  <option value=$op2>$option2 &nbsp;</select></td>";
+    echo "<td style='text-align:center'><select id='alarm$reg[0]' onchange='updateStatus($reg[0])' >  <option value=$op1>$option1  <option value=$op2>$option2 &nbsp;</select></td>";
     echo "</tr>";
 
 }
