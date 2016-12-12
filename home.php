@@ -20,45 +20,6 @@
 				homeSimulation();
 			});
 		</script> 
-<script>
-$(document).ready(function(){
-	$("configAlarm").hide();
-        $("btnShowAlarm").show();
-        $("btnHideAlarm").hide();
-        $("addAlarm").hide();
-        $("editAlarm").hide();
-        $("delAlarm").hide();
-    $("#hide").click(function(){
-        $("configAlarm").hide();
-        $("btnShowAlarm").show();
-        $("btnHideAlarm").hide();
-        $("addAlarm").hide();
-        $("editAlarm").hide();
-        $("delAlarm").hide();
-    });
-    $("#show").click(function(){
-        $("configAlarm").show();
-        $("btnHideAlarm").show();
-        $("btnShowAlarm").hide();
-    });
-    $("#showAddAlarm").click(function(){
-        $("editAlarm").hide();
-        $("delAlarm").hide();
-        $("addAlarm").show();
-    });
-    $("#showEditAlarm").click(function(){
-        $("addAlarm").hide();
-        $("delAlarm").hide();
-        $("editAlarm").show();
-    });
-    $("#showDelAlarm").click(function(){
-        $("addAlarm").hide();
-        $("editAlarm").hide();
-        $("delAlarm").show();
-    });
-
-});
-</script>
 
 <title>IoEnergyWater</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -164,7 +125,7 @@ th {
   <!-- Header Home -Begin -->
   <header class="w3-container" id="home">
 </br>
-<h3 style="color:white;"><b>General Information</b></h3>
+<h3 style="color:white;"><b>Energy General Information</b></h3>
 <table>
   <tr>
     <th>Energy General</th> 
@@ -172,7 +133,7 @@ th {
     <th>Input Hour (Solar)</th>
   </tr>
   <tr>
-    <td>Energy Produced</td>
+    <td>Produced</td>
     <td style="text-align:right"><output id="energyProduced" size = "10"></td>
     <td style="text-align:center"><input id="hourSolarInput" size="5px" value="12" style="text-align:center"> (0-24h)</input></td>
   </tr>
@@ -182,34 +143,20 @@ th {
   </tr>
   <tr>
     <td>Battery Charge</td>
-<input type='hidden' id='batteryInicial' size='4px' value=100></input>
+    <input type='hidden' id='batteryInicial' size='4px' value=100></input>
     <td style="text-align:right"><output id="batteryCharge" size = "10" value="0"></td>
   </tr>
-</table>
-  <!-- Header Home - End -->
-
-  <!-- Header Home -Begin -->
-</br>
-<table>
   <tr>
-    <th>Water General Consumption</th>
+    <th>Energy General</th> 
     <th>Current Value</th>
-    <th>Input Rain (%)</th>
+    <th>Status Energy</th>
   </tr>
   <tr>
-    <td>Stored Water</td>
-<input type='hidden' id='storedWaterInicial' size='4px' value=30></input>
-    <td style="text-align:right"><output id="storedWater" size = "10"></td>
-    <td style="text-align:center"><input id="rainInput" size="5px" value=50 style="text-align:center"> (0-100)</input></td>
-  </tr>
-  <tr>
-    <td>Water Total</td>
-    <td style="text-align:right"><output id="waterTotalHome" size = "10"></td>
+    <td>Company Use</td>
+    <td style="text-align:right"><output id="companyEnergyUsed" size = "10" value="0"></td>
+    <td style="text-align:center"><output id="statusEnergyCompany" size = "10" value="0"></td>
   </tr>
 </table>
-</header>
-
-    </br></br></br>
   <!-- Header Home - End -->
 
   <!-- Header Energy - Begin -->
@@ -268,9 +215,42 @@ th {
     </br></br></br>
   <!-- Header Energy - End -->
 
+  <!-- Header Home -Begin -->
+</br>
+<h3 style="color:white;"><b>Water General Information</b></h3>
+<table>
+  <tr>
+    <th>Water General</th>
+    <th>Current Value</th>
+    <th>Input Rain (L/min)</th>
+  </tr>
+  <tr>
+    <td>Total Stored</td>
+<input type='hidden' id='storedWaterInicial' size='4px' value=50></input>
+    <td style="text-align:right"><output id="storedWater" size = "10"></td>
+    <td style="text-align:center"><input id="rainInput" size="5px" value=50 style="text-align:center"> (0-62.5) *</input></td>
+  </tr>
+  <tr>
+    <td>Total Consumed</td>
+    <td style="text-align:right"><output id="waterTotalHome" size = "10"></td>
+  </tr>
+  <tr>
+    <td>Company Consumed</td>
+    <td style="text-align:right"><output id="companyWaterUsed" size = "10"></td>
+  </tr>
+  <tr>
+    <td>Use Stored</td>
+    <td style="text-align:center"><select id="useStored">  <option value=0>No  <option value=1>Yes &nbsp;</select></td>
+  </tr>
+</table>
+</header>
+
+    </br>
+  <!-- Header Home - End -->
+
+
   <!-- Header Water - Begin -->
   <header class="w3-container" id="water">
-</br></br>
 <h3 style="color:white;"><b>Water Consumption</b></h3>
 <table>
   <tr>
@@ -298,92 +278,6 @@ th {
     </br></br></br>
   <!-- Header Water -End -->
 
-<!-- Header Alarm Energy - Begin maximum value -->
-  <header class="w3-container" id="alarm">
-</br></br>
-<h3 style="color:white;"><b>Alarms</b></h3>
-<table>
-  <tr>
-    <th>Id</th>
-    <th>Device</th>
-    <th>Max-Value</th>
-    <th>Status</th>
-  </tr>
-
-<?php include 'tableAlarms.php';?>
-
-</table>
-
-  </header>
-</br></br></br>
-  <!-- Header Alarm Energy - End -->
-
-
-  <!-- Header Alarms - Begin -->
-<header class="iew-container" id="alarmConfig" align="center"></br>
-
-        <btnShowAlarm>
-		<a href="#alarmConfig" class="iew-btn iew-black" id="show"><h3>Alarm Configuration >></h3></a>
-	</btnShowAlarm>
-
-	<btnHideAlarm>
-		<a href="#alarmConfig" class="iew-btn iew-black" id="hide"><h3><< Alarm Configuration</h3></a>
-	</btnHideAlarm>
-
-      <div class="iew-section iew-bottombar iew-padding-8" align="center">
-	<configAlarm>
-	       <span class="iew-btn iew-white" align="center"><h4><a href=""></a></span>
-	<form id="form1" align="center" name="form1">
-        	<div class="control-group">
-		   <h4 style="color:black;"><b>Select Option</b></h4>
-	           <div class="controls" align="center"></br>
-			<a href="#alarmConfig" class="iew-btn iew-white" id="showAddAlarm"><h4>Add</h4></a>
-			<a href="#alarmConfig" class="iew-btn iew-white" id="showEditAlarm"><h4>Edit</h4></a>
-			<a href="#alarmConfig" class="iew-btn iew-white" id="showDelAlarm"><h4>Delete</h4></a>
-                   </div></h4>
-                </div>
-        </form>
-        </configAlarm> 
-
-	<addAlarm>
-		  <span class="iew-btn iew-white"><h4><a href=""></a></span>
-		    <form id="form2" align="center" name="form2" method="POST" action="crudAlarms.php" onsubmit="return validAdd(this);">
-		              <input id="deviceIdAlarm" name="deviceIdAlarm" type="text" placeholder="Device ID">
-		           <div class="controls"></br>
-		              <input id="maxValueAlarm" name="maxValueAlarm" type="text" placeholder="Maximum Value">
-			   </div>
-           		   <div class="controls"></br>
-		              <button class="iew-btn iew-black" id="enter" name="enter" value="add">Add</button>
-                           </div></h4>
-                    </form>
-	</addAlarm>
-
-	<editAlarm>
-		  <span class="iew-btn iew-white"><h4><a href=""></a></span>
-		    <form id="form3" align="center" name="form3" method="POST" action="crudAlarms.php" onsubmit="return validEdit(this);">
-		              <input id="deviceIdAlarm" name="deviceIdAlarm" type="text" placeholder="Device ID">
-		           <div class="controls"></br>
-		              <input id="maxValueAlarm" name="maxValueAlarm" type="text" placeholder="Maximum Value">
-			   </div>
-           		   <div class="controls"></br>
-              		      <button class="iew-btn iew-black" id="enter" name="enter" value="edit">Edit</button>
-                           </div></h4>
-                    </form>
-	</editAlarm>
-
-	<delAlarm>
-		  <span class="iew-btn iew-white"><h4><a href=""></a></span>
-		    <form id="form4" align="center" name="form4" method="POST" action="crudAlarms.php" onsubmit="return validDel(this);">
-		              <input id="deviceIdAlarm" name="deviceIdAlarm" type="text" placeholder="Device Id">
-           		   <div class="controls"></br>
-              		      <button class="iew-btn iew-black" id="enter" name="enter" value="del">Delete</button>
-                           </div></h4>
-                    </form>
-	</delAlarm>
-
-
-  </header>
- <!-- Header Alarms - End -->
 </br></br>
  <div class="iew-black iew-center iew-padding-24"><h3>System IoEnergyWater</h3></div>
 </div>
@@ -407,28 +301,8 @@ function iew_logout() {
 }
 </script>
 
-<script>
-function updateStatus(idAlarm) {
-statusAlarm = document.getElementById("statusAlarm"+idAlarm).value;
-    if(statusAlarm == "on"){
-        changeValue = "off";
-    } else {
-        changeValue = "on"; }
-    window.location.href='updateAlarm.php?idAlrm='+idAlarm+'&changeStatus='+changeValue;
-}
-
-function updateStatusVar(idVar) {
-statusVar = document.getElementById("statusVar"+idVar).value;
-    if(statusVar == "on"){
-        changeValue = "off";
-    } else {
-        changeValue = "on"; }
-    window.location.href='UpdateStatusVar.php?idVar='+idVar+'&changeStatus='+changeValue;
-}
-</script>
-
 </body>
 
-<script src="SimuVariables.js"></script>
+<script src="SimuIEWVar.js"></script>
 
 </html>
