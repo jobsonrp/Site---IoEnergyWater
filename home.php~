@@ -133,14 +133,9 @@ th {
     <th>Input Hour (Solar)</th>
   </tr>
   <tr>
-    <td>Sun</td>
-    <td style="text-align:right"><output form="sunform" name="y" ></output> </td>
-    <td style="text-align:center"><form id="sunform" oninput="y.value=parseFloat( (24*sun.value/100).toFixed(2)) + ' Hrs' ">0
-                                  <input type="range" id="hourSolarInput" name="sun" value="0"> 24 </form></input></td>
-  </tr>
-  <tr>
     <td>Produced</td>
     <td style="text-align:right"><output id="energyProduced" size = "10"></td>
+    <td style="text-align:center"><input id="hourSolarInput" size="5px" value="12" style="text-align:center"> (0-24h)</input></td>
   </tr>
   <tr>
     <td>Total Consumed</td>
@@ -220,9 +215,8 @@ th {
     </br></br></br>
   <!-- Header Energy - End -->
 
-  <!-- Header Water1 -Begin -->
+  <!-- Header Home -Begin -->
 </br>
-<header class="w3-container" id="water">
 <h3 style="color:white;"><b>Water General Information</b></h3>
 <table>
   <tr>
@@ -231,15 +225,10 @@ th {
     <th>Input Rain (L/min)</th>
   </tr>
   <tr>
-    <td>Rain</td>
-    <td style="text-align:right"><output form="numform" name="x" ></output> </td>
-    <td style="text-align:center"><form id="numform" oninput="x.value=parseFloat( (62.5*a.value/100).toFixed(2)) + ' L/min' ">0
-                                  <input type="range" id="rainInput" name="a" value="0"> 62.5 </form></input></td>
-  </tr>
-  <tr>
     <td>Total Stored</td>
-    <input type='hidden' id='storedWaterInicial' size='4px' value=50></input>
+<input type='hidden' id='storedWaterInicial' size='4px' value=50></input>
     <td style="text-align:right"><output id="storedWater" size = "10"></td>
+    <td style="text-align:center"><input id="rainInput" size="5px" value=50 style="text-align:center"> (0-62.5) *</input></td>
   </tr>
   <tr>
     <td>Total Consumed</td>
@@ -260,7 +249,8 @@ th {
   <!-- Header Home - End -->
 
 
-  <!-- Header Water2 - Begin -->
+  <!-- Header Water - Begin -->
+  <header class="w3-container" id="water">
 <h3 style="color:white;"><b>Water Consumption</b></h3>
 <table>
   <tr>
@@ -313,6 +303,6 @@ function iew_logout() {
 
 </body>
 
-<script src="SimuIEWVar1.js"></script>
+<script src="SimuIEWVar.js"></script>
 
 </html>
