@@ -9,16 +9,56 @@
         }
 ?>
 
+<?php
+// Conexão Local
+include("connect.inc");
+$table = "water_general";
+$lista = array(); //id
+$dens = array(); // value
+
+$i = 0;
+
+$result = mysqli_query($connect,"SELECT * FROM $table") or die("error select Water");
+while($reg=mysqli_fetch_row($result)) {
+
+ $lista[$i] = $reg[0];
+ $dens[$i] = $reg[2];
+ $i = $i + 1;
+}
+ 
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-		<script src="validForms.js"></script>
-		<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-		<script type="text/javascript">
-			jQuery(window).load(function($){
-				homeSimulation();
-			});
-		</script> 
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        ["Elemento", "Densidade" ],
+  	<?php
+  	$k = $i;
+  	for ($i = 0; $i < $k; $i++) {
+  	?>
+          ['<?php echo $lista[$i] ?>', <?php echo $dens[$i] ?>],
+  	<?php } ?>
+      	]);
+
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 
 <title>IoEnergyWater</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -121,6 +161,9 @@ th {
   <header class="w3-container" id="energy">
 </br>
 <h3 style="color:white;"><b>Energy General Information</b></h3>
+
+<div id="curve_chart" style="width: 900px; height: 500px"></div>
+
 <table>
   <tr>
     <th>Energy General</th> 
@@ -137,167 +180,19 @@ th {
     <td>Produced</td>
     <td style="text-align:right"><output name="energyProduced" id="energyProduced" size = "10"></td>
   </tr>
-  <tr>
-    <td>Total Consumed</td>
-    <td style="text-align:right"><output id="energyTotal" size = "10"></td>
-  </tr>
-  <tr>
-    <td>Battery Charge</td>
-    <input type='hidden' id='batteryInicial' size='4px' value=100></input>
-    <td style="text-align:right"><output id="batteryCharge" size = "10" value="0"></td>
-  </tr>
-  <tr>
-    <th>Energy General</th> 
-    <th>Current Value</th>
-    <th>Status Energy</th>
-  </tr>
-  <tr>
-    <td>Company Use</td>
-    <td style="text-align:right"><output id="companyEnergyUsed" size = "10" value="0"></td>
-    <td style="text-align:center"><output id="statusEnergyCompany" size = "10" value="0"></td>
-  </tr>
+
 </table>
   <!-- Header Home - End -->
 
-<!-- Header Energy - Begin -->
-  <header class="w3-container" id="energy">
-</br></br>
-<h3 style="color:white;"><b>Energy Consumption</b></h3>
-<table>
-  <tr>
-    <th>Device</th>
-    <th>Current Value</th>
-    <th>Status</th>
-  </tr>
-
-<?php include 'tableEnergy.php';?>
-
-</table>
-
-  </header>
-</br>
-  <!-- Header Energy - End -->
-
-  <!-- Header Energy - Begin -->
-  <header class="w3-container" id="energy">
-<table>
-  <tr>
-    <th>Subtotals Sources</th>
-    <th>Current Value</th>
-  </tr>
-  <tr>
-    <td>LightingTotal</td>
-    <td style="text-align:right"><output id="lightingTotal" type="text"></td>   
-  </tr>
-  <tr>
-    <td>PlugTotal</td>
-    <td style="text-align:right"><output id="plugTotal" type="text"></td>
-  </tr>
-</table>
-
-  </header>
-    </br></br></br>
-  <!-- Header Energy - End -->
-
-  <!-- Header Water1 -Begin -->
-</br>
-<header class="w3-container" id="water">
-<h3 style="color:white;"><b>Water General Information</b></h3>
-<table>
-  <tr>
-    <th>Water General</th>
-    <th>Current Value</th>
-    <th>Input Rain (L/min)</th>
-  </tr>
-  <tr>
-    <td>Rain</td>
-    <td style="text-align:right"><output form="numform" name="x" ></output> </td>
-    <td style="text-align:center"><form id="numform" oninput="x.value=parseFloat( (62.5*a.value/100).toFixed(2)) + ' L/min' ">0
-                                  <input type="range" id="rainInput" name="a" value="0"> 62.5 </form></input></td>
-  </tr>
-  <tr>
-    <td>Total Stored</td>
-    <input type='hidden' id='storedWaterInicial' size='4px' value=50></input>
-    <td style="text-align:right"><output id="storedWater" size = "10"></td>
-  </tr>
-  <tr>
-    <td>Total Consumed</td>
-    <td style="text-align:right"><output id="waterTotalHome" size = "10"></td>
-  </tr>
-  <tr>
-    <td>Company Consumed</td>
-    <td style="text-align:right"><output id="companyWaterUsed" size = "10"></td>
-  </tr>
-  <tr>
-    <td>Use Stored</td>
-    <td style="text-align:center"><select id="useStored">  <option value=0>No  <option value=1>Yes &nbsp;</select></td>
-  </tr>
-</table>
-</header>
-
-    </br>
-  <!-- Header Home - End -->
-
-<!-- Header Water BD - Begin -->
-  <header class="w3-container" id="water">
-</br></br>
-<h3 style="color:white;"><b>Water Consumption</b></h3>
-<table>
-  <tr>
-    <th>Device</th>
-    <th>Current Value</th>
-    <th>Status</th>
-  </tr>
-
-<?php include 'tableWater.php';?>
-
-</table>
-
-  </header>
-</br>
-  <!-- Header Water BD - End -->
-
-<!-- Header Energy BD Alarm - Begin -->
-  <header class="w3-container" id="alarmEnergy">
-</br></br>
-<h3 style="color:white;"><b>Energy Alarms</b></h3>
-<table>
-  <tr>
-    <th>Device</th>
-    <th>Max Value</th>
-    <th>Status</th>
-  </tr>
-
-<?php include 'tableAlarmsEnergy.php';?>
-
-</table>
-
-  </header>
-</br>
 
 
-  <!-- Header Energy BD Alarm- End -->
 
-<!-- Header Water BD Alarm - Begin -->
-  <header class="w3-container" id="alarmWater">
-</br></br>
-<h3 style="color:white;"><b>Water Alarms</b></h3>
-<table>
-  <tr>
-    <th>Device</th>
-    <th>Max Time (min)</th>
-    <th>Status</th>
-  </tr>
 
-<?php include 'tableAlarmWater.php';?>
 
-</table>
 
-  </header>
-</br>
-  <!-- Header Water BD Alarm- End -->
 
-  <!-- BEGIN Button DB Register -->
+
+  <!-- BEGIN -->
     </br>
 	<div align="center">  
 
@@ -307,7 +202,7 @@ th {
 
 
  </br></br>
- <!-- END Button DB Register -->
+ <!-- END -->
 
 </br></br>
  <div class="iew-black iew-center iew-padding-24"><h3>System IoEnergyWater</h3></div>
@@ -318,7 +213,6 @@ th {
 
 </body>
 
-<script src="SimuIEWVar.js"></script>
 
 </html>
 
