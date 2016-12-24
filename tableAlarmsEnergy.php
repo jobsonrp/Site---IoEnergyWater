@@ -5,7 +5,7 @@ $result = mysqli_query($connect,"SELECT * FROM $table") or die("erro ao selecion
 while($reg=mysqli_fetch_row($result)) {
     echo "<tr>";
     echo "<td>$reg[1]</td>";
-    echo "<td align='center'><input id='maxValueEnergy$reg[0]' size='8px' style=' background:white; color:black;' value=$reg[4]></input></td>";
+    echo "<td align='center'><input id='maxValueEnergy$reg[0]' size='6px' style=' background:white; color:black;' value=$reg[4]></input></td>";
     if ($reg[5] == "on"){
         $option1 = "On";
         $op1 = '1'; 

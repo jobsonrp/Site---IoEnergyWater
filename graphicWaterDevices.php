@@ -275,7 +275,7 @@ According to the United Nations, each person needs 3.3 cubic meter/person/month 
 <div class="iew-white iew-center"><h3>Search Analysis</h3></div>
 
 	<h4 style="color:white; text-align:left"><b>Number of People Living in the House : </b>
-	<b style="color:yellow;"><?php echo "$numPeople people"; ?></b></h4>
+	<b style="color:yellow;"><?php echo "$numPeople person"; ?></b></h4>
 
 	<h4 style="color:white; text-align:left"><b>Search Interval : </b>
 	<b style="color:yellow;">

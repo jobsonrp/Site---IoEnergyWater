@@ -11,7 +11,13 @@ $value6 = $_GET['plug2'];
 $values = array($value1, $value2, $value3, $value4, $value5, $value6);
 
 $table = "energy_devices";
+
+$date = new DateTime();
+$date->setTimezone(new DateTimeZone('America/Recife'));
+$fdate = $date->format('Y-m-d H:i:s');
+
 include("connect.inc");
+
 $result = mysqli_query($connect,"SELECT * FROM $table") or die("erro ao selecionar Energy");
 while($reg=mysqli_fetch_row($result)) {
 
@@ -21,15 +27,14 @@ while($reg=mysqli_fetch_row($result)) {
 	} else {
 		$status = "on";
 	}
-	
-	$sql="INSERT INTO history_energy_device (id_device, name, value, status, max_value, status_alarm) VALUES ('$reg[0]','$reg[1]','$value','$status','$reg[4]', '$reg[5]')";
+	$sql="INSERT INTO history_energy_device (id_device, name, value, status, max_value, status_alarm, date) VALUES ('$reg[0]','$reg[1]','$value','$status','$reg[4]', '$reg[5]', '$fdate')";
 
 	if (mysqli_query($connect, $sql)) {
 	    $cont = $cont + 1;
-	    echo " Valor= " . $value . ". New record created successfully";
+	    //echo " Valor= " . $value . ". New record created successfully";
 	} else {
 	    echo"<script language='javascript' type='text/javascript'>alert('Error!');window.location.href='home.php';</script>";
-	    echo "Error: " . $sql . "<br>" . mysqli_error($connect);
+	    //echo "Error: " . $sql . "<br>" . mysqli_error($connect);
 	}
 }
 	
@@ -54,14 +59,14 @@ $table = "energy_general";
 	} else {
 	    $status = "-";
 	}	
-		$sql="INSERT INTO history_energy_general (id_device, name, value, status) VALUES ('$reg[0]','$reg[1]','$value','$status')";
+		$sql="INSERT INTO history_energy_general (id_device, name, value, status, date) VALUES ('$reg[0]','$reg[1]','$value','$status', '$fdate')";
 
 		if (mysqli_query($connect, $sql)) {
 		    $cont = $cont + 1;
-		    echo " Valor= " . $value . ". New record created successfully";
+		    //echo " Valor= " . $value . ". New record created successfully";
 		} else {
 		    echo"<script language='javascript' type='text/javascript'>alert('Error!');window.location.href='home.php';</script>";
-	    	    echo "Error: " . $sql . "<br>" . mysqli_error($connect);
+	    	    //echo "Error: " . $sql . "<br>" . mysqli_error($connect);
 		    
 		}
 	}
@@ -85,14 +90,14 @@ while($reg=mysqli_fetch_row($result)) {
 		$status = "open";
 	}
 	
-	$sql="INSERT INTO history_water_device (id_device, name, value, status, max_time, status_alarm) VALUES ('$reg[0]','$reg[1]','$value','$status','$reg[4]', '$reg[5]')";
+	$sql="INSERT INTO history_water_device (id_device, name, value, status, max_time, status_alarm, date) VALUES ('$reg[0]','$reg[1]','$value','$status','$reg[4]', '$reg[5]', '$fdate')";
 
 	if (mysqli_query($connect, $sql)) {
 	    $cont = $cont + 1;
-	    echo " Valor= " . $value . ". New record created successfully";
+	    //echo " Valor= " . $value . ". New record created successfully";
 	} else {
 	    echo"<script language='javascript' type='text/javascript'>alert('Error!');window.location.href='home.php';</script>";
-	    echo "Error: " . $sql . "<br>" . mysqli_error($connect);
+	    //echo "Error: " . $sql . "<br>" . mysqli_error($connect);
 	}
 }
 
@@ -112,16 +117,16 @@ $table = "water_general";
 
 	$value = $values[$reg[0]-1];
 	
-		$sql="INSERT INTO history_water_general (id_device, name, value) VALUES ('$reg[0]','$reg[1]','$value')";
+		$sql="INSERT INTO history_water_general (id_device, name, value, date) VALUES ('$reg[0]','$reg[1]','$value', '$fdate')";
 
 		if (mysqli_query($connect, $sql)) {
 
 		  echo"<script language='javascript' type='text/javascript'>alert('DataRegister Success!');window.location.href='home.php';</script>";
-   	          echo " Valor= " . $value . ". New record created successfully";
+   	          //echo " Valor= " . $value . ". New record created successfully";
 		
 	        } else {
 		    echo"<script language='javascript' type='text/javascript'>alert('Error!');window.location.href='home.php';</script>";
-	    	    echo "Error: " . $sql . "<br>" . mysqli_error($connect);
+	    	    //echo "Error: " . $sql . "<br>" . mysqli_error($connect);
 		}
 	}
 

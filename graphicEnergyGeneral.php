@@ -62,7 +62,7 @@ $fdateBeginStr = $dateBeginStr->format('Y-m-d H:i');
 
 //echo $interval;
 
-$table = "history_water_device";
+$table = "history_energy_general";
 
 $statusAlarm = array();
 $time = array(); 
@@ -79,7 +79,7 @@ while($reg=mysqli_fetch_row($result)) {
 	   $statusAlarm[$i] = 0;	
 	}
  
- $time[$i] = $reg[7];
+ $time[$i] = $reg[4];
  $valueVar[$i] = $reg[3];
  $i = $i + 1;
 
@@ -124,16 +124,14 @@ $SumVarName = $SumVarName + $reg[3];
       	]);
 
         var options = {
-          title: 'History Water Device',
+          title: 'History Energy General',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
 
         var chart1 = new google.visualization.LineChart(document.getElementById('curve_chart1'));
-	//var chart2 = new google.visualization.LineChart(document.getElementById('curve_chart2'));
 
         chart1.draw(data, options);
-	//chart2.draw(data, options);
 	
       }
     </script>
@@ -244,11 +242,9 @@ th {
 
        <div align="center">  
 	<form align="left" class="iew-btn iew-white">
-	<h4 style="color:black; text-align:left"><b>Graphic Water Devices</b></h4></br>
-	<b>Number of People Living in the House :</b>
-	<input class="iew-btn iew-white" type="number" id="numPeople" name="numPeople" value=1 size="3" min="1" max="10"></br></br>
+	<h4 style="color:black; text-align:left"><b>Graphic Energy General</b></h4></br>
 	<b>Select Variable</b>
-	<select name="varId" class="iew-btn iew-white"> <option value=1>Shower <option value=2>Bathroom Tap <option value=3>Kitchen Tap </select>
+	<select name="varId" class="iew-btn iew-white"> <option value=1>Sun (Hour) <option value=2>Energy Produced <option value=3>Total Consumed <option value=4>Battery Charge <option value=5>Company Use </select>
 	  </br></br>
 	  <b>&nbsp;&nbsp;Initial :&nbsp;</b>
 	  <input class="iew-btn iew-white" type="datetime-local" id="dateBegin" name="dateBegin" value="2016-12-20T00:00">&nbsp;&nbsp; </br></br>
@@ -268,20 +264,14 @@ th {
            <div class="iew-left" id="curve_chart1" style="width: 100% ; height: 500px"></div>
        </div> 
  </br></br>
-	<h4 style="color:white; text-align:left"><b>	
-According to the United Nations, each person needs 3.3 cubic meter/person/month (about 110 liters of water per day to meet consumption and hygiene needs). However, in Brazil, consumption per person can reach more than 200 liters/day. </b></h4></br>
-
 
 <div class="iew-white iew-center"><h3>Search Analysis</h3></div>
-
-	<h4 style="color:white; text-align:left"><b>Number of People Living in the House : </b>
-	<b style="color:yellow;"><?php echo "$numPeople people"; ?></b></h4>
 
 	<h4 style="color:white; text-align:left"><b>Search Interval : </b>
 	<b style="color:yellow;">
 
 	<?php
-	$consumeDesired = $numPeople * 110; 
+	$consumeDesired = $numPeople * 2500; 
 
 		if ($interval->m == '0') {
 			$total = ($interval->d) * $consumeDesired;
@@ -289,44 +279,28 @@ According to the United Nations, each person needs 3.3 cubic meter/person/month 
 				echo "{$interval->h} hours 1"; 
 				$total = ( ($interval->h) / 24 )* $consumeDesired ;
 				$total = sprintf("%01.2f", $total);
-				$totalDesired = "( {$interval->h}/24 ) * ({$numPeople} * 110) = $total ";
+				$totalDesired = "( {$interval->h}/24 ) * ({$numPeople} * 2500) = $total ";
 			} else {
 				echo "{$interval->d} days and {$interval->h} hours";
 				$totalDays = ($interval->d) + ($interval->h)/24;
 				$total = $totalDays * $consumeDesired;
 				$total = sprintf("%01.2f", $total);
-				$totalDesired = "( {$interval->d} + {$interval->h}/24 ) * ({$numPeople} * 110) = $total ";
+				$totalDesired = "( {$interval->d} + {$interval->h}/24 ) * ({$numPeople} * 2500) = $total ";
 			}
 		} else {
 			$totalDays = (30 * ($interval->m)) + ($interval->d) + ($interval->h)/24;
 			echo "$totalDays days 3";
 			$total = $totalDays * $consumeDesired;
 			$total = sprintf("%01.2f", $total);
-			$totalDesired = "( (30 * {$interval->m}) + {$interval->d} + {$interval->h}/24 ) * ({$numPeople} * 110) = $total ";		
+			$totalDesired = "( (30 * {$interval->m}) + {$interval->d} + {$interval->h}/24 ) * ({$numPeople} * 2500) = $total ";		
 		}
 
 	?>
 
 	</b></h4>
 
-	<h4 style="color:white; text-align:left"><b>Total Desired Consumption in this Interval : </b>
-	<b style="color:yellow;"><?php echo "$totalDesired Liters in the house"; ?></b></h4>
-
-	<h4 style="color:white; text-align:left"><b>Total Sum Consumption in this Interval : </b>
-	<b style="color:yellow;"><?php echo "$SumVarName Liters in the house"; ?></b></h4>
-
-	<h4 style="color:white; text-align:left"><b>Analysis Result : </b>
-	<b style="color:yellow;">
-		<?php
-
-			$messageConsumption = "Normal Consumption"; 
-			if ($SumVarName > $total) {
-				$messageConsumption = "Consumption Exceeded";
-			}
-			echo $messageConsumption;
-		?>
-</b></h4>
-
+	<h4 style="color:white; text-align:left"><b>Total Sum in this Interval : </b>
+	<b style="color:yellow;"><?php echo "$SumVarName Watts"; ?></b></h4>
 
 
 </b></h4>

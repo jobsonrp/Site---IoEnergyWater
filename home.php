@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if(!isset($_SESSION["status"])){
-          echo"<script language='javascript' type='text/javascript'>alert('Please! Make Login.');window.location.href='index.php';</script>";
+          echo"<script language='javascript' type='text/javascript'>alert('Please! Make Login.');window.location.href='index.php#login';</script>";
         }
         else{
         $login = $_SESSION['inputEmail'];
@@ -74,12 +74,9 @@ th {
 
 <h5 class="iew-text-grey" align='left'>
 <?php echo "Username : $login"; ?>
-</br>
-<?php echo "CPF : $cpf"; ?>
-
 </h5>
 
- <h4 class="iew-text-black"><b>System IoEnergyWater</b></h4><br>
+ <h4 class="iew-text-black"><b>System IoEnergyWater</b></h4>
   </div>
   <a href="home.php#home" onclick="iew_close()" class="iew-padding iew-text-teal"><i class="fa fa-th-large fa-fw iew-margin-right"></i>HOME</a>
   <a href="home.php#energy" onclick="iew_close()" class="iew-padding"><i class="fa fa-lightbulb-o fa-fw iew-margin-right"></i>ENERGY</a>
@@ -87,6 +84,7 @@ th {
   <a href="home.php#alarmEnergy" onclick="iew_close()" class="iew-padding"><i class="fa fa-warning fa-fw iew-margin-right"></i>ALARMS - Energy</a>
   <a href="home.php#alarmWater" onclick="iew_close()" class="iew-padding"><i class="fa fa-warning fa-fw iew-margin-right"></i>ALARMS - Water</a>
   <a href="history.php" onclick="iew_close()" class="iew-padding"><i class="fa fa-history fa-fw iew-margin-right"></i>DATA HISTORY</a>
+  <a href="home.php#register" onclick="iew_close()" class="iew-padding"><i class="fa fa-inbox fa-fw iew-margin-right"></i>DATA REGISTER</a>	
   <a href="contact.php" onclick="iew_close()" class="iew-padding"><i class="fa fa-contao fa-fw iew-margin-right"></i>CONTACT</a>
   <a href="logout.php" class="iew-padding"><i class="fa fa-user fa-fw iew-margin-right"></i>LOGOUT</a>   
 
@@ -108,9 +106,9 @@ th {
     <span class="iew-opennav iew-hide-large iew-xxlarge iew-hover-text-grey" onclick="iew_open()"><i class="fa fa-bars"></i></span>
     <h2 style="text-shadow: 2px 2px 2px white"><b>IoEnergyWater</b></h2>
     <div class="iew-section iew-padding-16">
-      <a href="#home" class="iew-btn">Home</a>
-      <a href="#energy" class="iew-btn iew-white">Energy</a>
-      <a href="#water" class="iew-btn iew-white">Water</a>
+      <a href="home.php#home" class="iew-btn">Home</a>
+      <a href="home.php#energy" class="iew-btn iew-white">Energy</a>
+      <a href="home.php#water" class="iew-btn iew-white">Water</a>
     </div>
   </header>
   
@@ -238,6 +236,8 @@ th {
     </br>
   <!-- Header Home - End -->
 
+<h4 style="color:white;"><b>In the rain gauge every 1 mm equals 1 L / square meter. Then considering a roof with 25 square meters and that a torrential rain of 150 mm / h, one can reach the maximum value of 62.5 L / min.</br>
+Note: The data were based on standard NBR 10844/89 ABNT Pluvial Water Installations.</b></h4>
 <!-- Header Water BD - Begin -->
   <header class="w3-container" id="water">
 </br></br>
@@ -298,23 +298,45 @@ th {
   <!-- Header Water BD Alarm- End -->
 
   <!-- BEGIN Button DB Register -->
-    </br>
+</br>
+<header class="w3-container" id="register">
+  <h3 style="color:white;"><b>Data Register</b></h3>
 	<div align="center">  
 
-            <button class="iew-btn iew-black" onclick="DataRegister_Now()"><h4>Data Register - DataBase</h4></button></h4>
+            <button class="iew-btn iew-white" onclick="DataRegister_Now()"><h3>Data Register - DataBase</h4></button></h3>
 
        </div>
 
-
  </br></br>
  <!-- END Button DB Register -->
+</br>
 
-</br></br>
- <div class="iew-black iew-center iew-padding-24"><h3>System IoEnergyWater</h3></div>
+    
+</header>
+
+<div class="iew-black iew-center iew-padding-24"><h3>System IoEnergyWater</h3></div>
+
 </div>
 <!-- End page content -->
 
 </div>
+
+<script>
+// Script to open and close sidenav
+function iew_open() {
+      document.getElementById("mySidenav").style.display = "block";
+      document.getElementById("myOverlay").style.display = "block";
+ }
+
+function iew_close() {
+     document.getElementById("mySidenav").style.display = "none";
+     document.getElementById("myOverlay").style.display = "none";
+ }
+ 
+ function iew_logout() {water1
+     header("location:logout.php");
+  }
+  </script>
 
 </body>
 
